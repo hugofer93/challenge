@@ -1,0 +1,90 @@
+{% extends 'app/base.html' %}
+
+
+{% block css %}
+    {% if request.GET.githubUser %}
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    {% endif %}
+{% endblock css %}
+  
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Wunderman Thompson</h1>
+        <p class="lead">Please enter a GitHub Username to list repositories. The search box is in the navbar.</p>
+      </div>
+      
+      {% if request.GET.githubUser %}
+      <div id="wrapperDataTable" hidden>
+        <table id="repositories" class="display" style="width:100%">
+          <thead>
+            <tr>
+              <th>Repository</th>
+              <th>Created at</th>
+            </tr>
+            <tfoot>
+            <tr>
+              <th>Repository</th>
+              <th>Created at</th>
+            </tr>
+          </tfoot>
+          </thead>
+        </table>
+      </div>
+      {% endif %}
+
+    </div>
+{% endblock content %}
+
+
+{% block js %}
+    {% if request.GET.githubUser %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script>
+      // Document is loaded
+      $(document).ready(function() {
+        var data = {};
+        var url = '{% url "api:repositoryGithubUser" githubUser=request.GET.githubUser %}';
+        axios.get(url)
+        .then(function (response) {
+          // ONLY STATUS CODE 200 OK
+          if (response.status === 200) {
+            data = response.data;
+          }
+        })
+        .catch(function (error) {
+          // ANY ERROR
+          $('#wrapperDataTable').hide();
+          alert("Github's User doesn't Exist or doesn't have repositories");
+          window.location.replace('{% url "app:home" %}');
+        })
+        .finally(function () {
+          // ALWAYS EXECUTED
+          $('#repositories').DataTable( {
+            data: data,
+            columns: [
+              { data: 'name' },
+              { data: 'created_at' }
+            ]
+          } );
+
+          // datatable's events
+          //$('#repositories').dataTable()
+          //.on( 'stateLoaded.dt', function (e, settings, data) {
+          //    alert()
+          //} );
+
+          $('#wrapperDataTable').removeAttr('hidden');
+
+        });
+      });
+    </script>
+    {% endif %}
+{% endblock js %}
+  

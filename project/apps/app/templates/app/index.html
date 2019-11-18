@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+
+{% block title %}Index{% endblock title %}
+
+
+{% block content %}
+    <div role="main" class="container">
+      <div class="jumbotron">
+        <h1>Wunderman Thompson</h1>
+        <p class="lead">This application searches github users, lists their repositories and orders them according to the user's preference.</p>
+        <a class="btn btn-lg btn-success" href="{% url 'core:signin' %}" role="button">Sign in »</a>
+        <a class="btn btn-lg btn-info" href="{% url 'core:signup' %}" role="button">Sign up »</a>
+      </div>
+    </div>
+{% endblock content %}
+  

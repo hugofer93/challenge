@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+pycodestyle = "*"
+django-debug-toolbar = "*"
+
+[packages]
+django = "<2.3"
+psycopg2 = "*"
+uwsgi = "*"
+djangorestframework = "*"
+requests = "*"
+
+[requires]
+python_version = "3.5"
