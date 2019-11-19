@@ -1,0 +1,17 @@
+# /etc/systemd/system
+Unit]
+Description=uWSGI Emperor service
+
+[Service]
+User=ubuntu
+Group=www-data
+# ExecStart=/path/to/virtualenv/uwsgi --emperor /etc/uwsgi/sites
+# if uwsgi is installed in OS
+ExecStart=uwsgi --emperor /etc/uwsgi/sites
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target

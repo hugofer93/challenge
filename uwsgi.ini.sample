@@ -1,0 +1,31 @@
+# /etc/uwsgi/sites/
+[uwsgi]
+# Django-related settings
+# Load environment variables
+for-readline = /path/to/.env
+  env = %(_)
+endfor =
+
+# the virtualenv (full path)
+home=/path/to/virtualenv
+
+# the base directory (full path)
+chdir=/path/to/your/project
+
+# Django's wsgi file
+module=project.wsgi:application
+
+# process-related settings
+# master
+master=true
+
+# maximum number of worker processes
+processes=2
+# the socket (use the full path to be safe
+socket=/path/to/your/project/mysite.sock
+
+# ... with appropriate permissions - may be needed
+# chmod-socket    = 664
+
+# clear environment on exit
+vacuum=true

@@ -10,9 +10,4 @@ urlpatterns = [
         RepositoryList.as_view(),
         name='repositoryGithubUser'
     )
-    #path(
-    #    'repository/<githubUser>/<githubRepos>/commits',
-    #    CommitsReposDetail.as_view(),
-    #    name='commitsRepositoryGithubUser'
-    #)
 ]
