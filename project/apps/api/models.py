@@ -4,22 +4,15 @@ from django.db import models
 from ..core.models import User
 
 
-# Create your models here.
-class LastRepositoryApi(models.Model):
-    available = models.BooleanField(default=True)
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
-    repositories = JSONField()
-
-    def __str__(self):
-        return self.user
-
-
-# Only save one User per request to Github Api
-class LastQueryApi(models.Model):
+class LastRequestReposGithubApi(models.Model):
     available = models.BooleanField(default=True)
     user = models.OneToOneField(User, on_delete=models.PROTECT)
-    uri = models.URLField(max_length=100)
-    date = models.DateTimeField(auto_now=True)
+    githubApiUrls = JSONField(default='[]')
+    lastTenReposSent = JSONField(default='[]')
+    lastRequest = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    available.boolean = True
 
     def __str__(self):
-        return self.user
+        return self.user.username

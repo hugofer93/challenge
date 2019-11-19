@@ -25,11 +25,13 @@
             <tr>
               <th>Repository</th>
               <th>Created at</th>
+              <th>Last Commit</th>
             </tr>
             <tfoot>
             <tr>
               <th>Repository</th>
               <th>Created at</th>
+              <th>Last Commit</th>
             </tr>
           </tfoot>
           </thead>
@@ -70,15 +72,10 @@
             data: data,
             columns: [
               { data: 'name' },
-              { data: 'created_at' }
+              { data: 'created_at' },
+              { data: 'last_commit' }
             ]
           } );
-
-          // datatable's events
-          //$('#repositories').dataTable()
-          //.on( 'stateLoaded.dt', function (e, settings, data) {
-          //    alert()
-          //} );
 
           $('#wrapperDataTable').removeAttr('hidden');
 
