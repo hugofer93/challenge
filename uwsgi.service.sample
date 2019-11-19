@@ -1,5 +1,5 @@
 # /etc/systemd/system
-Unit]
+[Unit]
 Description=uWSGI Emperor service
 
 [Service]
